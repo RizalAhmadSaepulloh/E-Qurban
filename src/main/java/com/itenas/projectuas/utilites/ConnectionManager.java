@@ -15,7 +15,7 @@ public class ConnectionManager {
 
     private Connection con;
     private String driver = "com.mysql.jdbc.Driver";
-    private String url = "jdbc:mysql://localhost:3306/database_w10";
+    private String url = "jdbc:mysql://localhost:3306/e-qurban";
     private String username = "root";
     private String password = "";
 
