@@ -10,6 +10,6 @@ package com.itenas.projectuas.controller;
  */
 public class NewClass {
     public static void main(String[] args) {
-        System.out.println("cek");
+        System.out.println("r");
     }
 }
