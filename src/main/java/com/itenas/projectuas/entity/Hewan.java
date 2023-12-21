@@ -9,6 +9,7 @@ package com.itenas.projectuas.entity;
  * @author rizal
  */
 public class Hewan {
+    private String idHewan;
     private String namaHewan;
     private double berat;
     private double harga;
@@ -16,12 +17,23 @@ public class Hewan {
     public Hewan() {
     }
 
-    public Hewan(String namaHewan, double berat, double harga) {
+    public Hewan(String idHewan, String namaHewan, double berat, double harga) {
+        this.idHewan = idHewan;
         this.namaHewan = namaHewan;
         this.berat = berat;
         this.harga = harga;
     }
 
+    public String getIdHewan() {
+        return idHewan;
+    }
+
+    public void setIdHewan(String idHewan) {
+        this.idHewan = idHewan;
+    }
+
+    
+    
     public String getNamaHewan() {
         return namaHewan;
     }
