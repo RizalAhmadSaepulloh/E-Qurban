@@ -16,6 +16,7 @@ public class User {
     private String noTelp;
 
     public User() {
+        
     }
 
     public User(String username, String password, String alamat, String nama, String noTelp) {

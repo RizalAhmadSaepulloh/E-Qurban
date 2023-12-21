@@ -15,7 +15,7 @@ import java.util.List;
 
 /**
  *
- * @author rizal
+ * @author M Alif Mi'Raj Jabbar
  */
 public class ControllerHewan {
     ConnectionManager conMan = new ConnectionManager();
