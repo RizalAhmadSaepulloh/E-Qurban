@@ -21,9 +21,9 @@ public class ControllerUser {
     ConnectionManager conMan = new ConnectionManager();
     Connection con = conMan.LogOn();
     
-    public boolean insertUser(String username, String password, String alamat, String nama, String noTelp){
-        String query = "INSERT INTO User values"
-                + "('" + username + "', '" + password + "', '" + alamat + "', " + "'" + nama
+    public boolean insertUser(String username, String password, String nama, String alamat, String noTelp){
+        String query = "INSERT INTO user VALUES "
+                + "('" + username + "', '" + password + "', '" + nama + "', '" + alamat
                 + "', '" + noTelp + "')";
         try {
             Statement stm = con.createStatement();

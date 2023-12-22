@@ -278,12 +278,20 @@ public class viewRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_password2ActionPerformed
 
     private void btn_registerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registerActionPerformed
-        conUs.insertUser(txt_username.getText(), String.valueOf(txt_password.getPassword()), txt_Alamat.getText(), txt_Nama.getText(), txt_noTelp.getText());
-        if (true) {
+        String username = txt_username.getText();
+        String password = txt_password.getText();
+        String nama = txt_Nama.getText();
+        String alamat = txt_Alamat.getText();
+        String noTelp = txt_noTelp.getText();
+        
+        boolean hasil = conUs.insertUser(username, password, nama, alamat, noTelp);
+        
+        if (hasil) {
             JOptionPane.showMessageDialog(null, "Register berhasil","Pesan",JOptionPane.INFORMATION_MESSAGE);
-            new viewLogin().setVisible(true);
+            viewLogin viewLogin = new viewLogin();
+            viewLogin.setVisible(true);
             dispose();
-        }else{
+        } else {
             JOptionPane.showMessageDialog(null, "register Gagal","Pesan",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_registerActionPerformed
