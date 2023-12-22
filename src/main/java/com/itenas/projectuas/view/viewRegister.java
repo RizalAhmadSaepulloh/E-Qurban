@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.itenas.projectuas.view;
+
 import com.itenas.projectuas.controller.ControllerLogin;
 import com.itenas.projectuas.controller.ControllerUser;
 import javax.swing.JOptionPane;
@@ -12,8 +13,10 @@ import javax.swing.JOptionPane;
  * @author rizal
  */
 public class viewRegister extends javax.swing.JFrame {
+
     ControllerLogin conLog = new ControllerLogin();
     ControllerUser conUs = new ControllerUser();
+
     /**
      * Creates new form viewLogin
      */
@@ -246,7 +249,7 @@ public class viewRegister extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void txt_usernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_usernameActionPerformed
-       
+
     }//GEN-LAST:event_txt_usernameActionPerformed
 
     private void txt_passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_passwordActionPerformed
@@ -254,17 +257,17 @@ public class viewRegister extends javax.swing.JFrame {
     }//GEN-LAST:event_txt_passwordActionPerformed
 
     private void btn_registerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_registerMouseClicked
-        
+
     }//GEN-LAST:event_btn_registerMouseClicked
 
     private void cb_passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_passActionPerformed
         if (cb_pass.isSelected()) {
-            txt_password.setEchoChar((char)0);
+            txt_password.setEchoChar((char) 0);
             cb_pass.setText("Hide Password");
-        }else{
+        } else {
             txt_password.setEchoChar('*');
             cb_pass.setText("Show Password");
-                    
+
         }
     }//GEN-LAST:event_cb_passActionPerformed
 
@@ -283,16 +286,18 @@ public class viewRegister extends javax.swing.JFrame {
         String nama = txt_Nama.getText();
         String alamat = txt_Alamat.getText();
         String noTelp = txt_noTelp.getText();
-        
+
         boolean hasil = conUs.insertUser(username, password, nama, alamat, noTelp);
-        
+
         if (hasil) {
-            JOptionPane.showMessageDialog(null, "Register berhasil","Pesan",JOptionPane.INFORMATION_MESSAGE);
+            // Register successful
+            JOptionPane.showMessageDialog(null, "Register berhasil", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             viewLogin viewLogin = new viewLogin();
             viewLogin.setVisible(true);
             dispose();
         } else {
-            JOptionPane.showMessageDialog(null, "register Gagal","Pesan",JOptionPane.ERROR_MESSAGE);
+            // Registration failed (likely due to duplicate username)
+            JOptionPane.showMessageDialog(null, "Username sudah ada", "Pesan", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_btn_registerActionPerformed
 
