@@ -24,7 +24,7 @@ public class ControllerHewan {
     
     public boolean insertHewan(String idHewan, String namaHewan, double harga, double berat){
         String query = "insert into hewan values " 
-                + "('"+idHewan+"', '" + namaHewan + "', " + harga+", " + berat + ")";
+                + "('"+idHewan+"', '" + namaHewan + "', " + harga + ", " + berat + ")";
         try {
             Statement stm = con.createStatement();
             stm.executeUpdate(query);

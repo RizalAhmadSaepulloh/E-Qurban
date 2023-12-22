@@ -24,7 +24,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
     
     User user = new User();
     private DefaultTableModel model;
-    private Hewan hewan;
+    private Hewan hewan = new Hewan();
     ControllerHewan conHewan = new ControllerHewan();
     ControllerUser conUser = new ControllerUser();
     public viewDashboardUser() {
@@ -151,7 +151,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nama Hewan", "Berat", "Harga"
+                "ID", "Nama Hewan", "Harga", "Berat"
             }
         ));
         tabelHewan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,7 +161,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelHewan);
         if (tabelHewan.getColumnModel().getColumnCount() > 0) {
-            tabelHewan.getColumnModel().getColumn(3).setResizable(false);
+            tabelHewan.getColumnModel().getColumn(2).setResizable(false);
         }
 
         btn_beli.setBackground(new java.awt.Color(255, 255, 255));
@@ -191,23 +191,21 @@ public class viewDashboardUser extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(54, 54, 54))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 529, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btn_history, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_beli, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(67, 67, 67))))
+                        .addGap(289, 289, 289)
+                        .addComponent(btn_beli, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(67, 67, 67))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 191, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(56, 56, 56)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_history, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_beli, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -234,16 +232,24 @@ public class viewDashboardUser extends javax.swing.JFrame {
 
     private void btn_beliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_beliActionPerformed
         int i = tabelHewan.getSelectedRow();
-        if (i == -1){
-            JOptionPane.showMessageDialog(btn_beli, "Pilih salah satu data:", "warning", JOptionPane.WARNING_MESSAGE);
-            return;
-        }
-        viewPembayaran pagePembayaran = new viewPembayaran(user,hewan);
-        dispose();
+    if (i == -1) {
+        JOptionPane.showMessageDialog(btn_beli, "Pilih salah satu data:", "warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+
+    // Pastikan objek hewan sudah diset
+    if (hewan == null) {
+        JOptionPane.showMessageDialog(btn_beli, "Data hewan tidak valid:", "warning", JOptionPane.WARNING_MESSAGE);
+        return;
+    }
+    viewPembayaran pagePembayaran = new viewPembayaran(user, hewan);
+    pagePembayaran.getDetailTransaction();
+    pagePembayaran.setVisible(true);
+    dispose();
     }//GEN-LAST:event_btn_beliActionPerformed
 
-    public User getUserInfo(User user) {
-        user = user;
+    public User getUserInfo(User usr) {
+        user = usr;
         lbl_username.setText(user.getNama());
 
         return user;
@@ -266,10 +272,20 @@ public class viewDashboardUser extends javax.swing.JFrame {
         // TODO add your handling code here:
         int i = tabelHewan.getSelectedRow();
         TableModel model = tabelHewan.getModel();
-        hewan.setIdHewan(model.getValueAt(i, 0).toString());
-        hewan.setNamaHewan(model.getValueAt(i, 1).toString());
-        hewan.setBerat((double) model.getValueAt(i, 2));
-        hewan.setHarga((double) model.getValueAt(i, 3));
+
+        // Dapatkan data hewan dari baris yang dipilih
+        String idHewan = model.getValueAt(i, 0).toString();
+        String namaHewan = model.getValueAt(i, 1).toString();
+        String harga = model.getValueAt(i, 2).toString();
+        String berat =  model.getValueAt(i, 3).toString();
+        
+
+        // Set data hewan
+        hewan.setIdHewan(idHewan);
+        hewan.setNamaHewan(namaHewan);
+        hewan.setBerat(Double.parseDouble(berat));
+        hewan.setHarga(Double.parseDouble(harga));
+        
     }//GEN-LAST:event_tabelHewanMouseClicked
 
     /**
