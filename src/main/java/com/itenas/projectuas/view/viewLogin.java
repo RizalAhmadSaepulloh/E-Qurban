@@ -5,6 +5,7 @@
 package com.itenas.projectuas.view;
 
 import com.itenas.projectuas.controller.ControllerLogin;
+import com.itenas.projectuas.entity.User;
 import javax.swing.JOptionPane;
 
 /**
@@ -14,7 +15,7 @@ import javax.swing.JOptionPane;
 public class viewLogin extends javax.swing.JFrame {
 
     ControllerLogin conLog = new ControllerLogin();
-
+    User user;
     /**
      * Creates new form viewLogin
      */
@@ -207,14 +208,19 @@ public class viewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lbl_registerMouseClicked
 
     private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
-        int stat = conLog.login(txt_username.getText(), String.valueOf(txt_password.getPassword()));
+        String username = txt_username.getText();
+        String password = txt_password.getText();
+        user = conLog.loginUser(username, password);
+        int stat = conLog.Otorisasi(username, password);
         if (stat == 1) {
             JOptionPane.showMessageDialog(null, "Login Berhasil", "Pesan", JOptionPane.INFORMATION_MESSAGE);
             new viewDashboardAdmin().setVisible(true);
             dispose();
         } else if (stat == 2) {
             JOptionPane.showMessageDialog(null, "Login Berhasil", "Pesan", JOptionPane.INFORMATION_MESSAGE);
-            new viewDashboardUser().setVisible(true);
+            viewDashboardUser dashboardUser = new viewDashboardUser(user);
+            dashboardUser.getUserInfo(user);
+            dashboardUser.setVisible(true);
             dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Username atau Password salah", "Pesan", JOptionPane.INFORMATION_MESSAGE);

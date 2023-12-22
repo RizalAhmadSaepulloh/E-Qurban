@@ -4,25 +4,66 @@
  */
 package com.itenas.projectuas.view;
 
+import com.itenas.projectuas.controller.ControllerHewan;
+import com.itenas.projectuas.controller.ControllerUser;
+import com.itenas.projectuas.entity.Hewan;
 import javax.swing.JOptionPane;
 import com.itenas.projectuas.entity.User;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
  * @author rizal
  */
 public class viewDashboardUser extends javax.swing.JFrame {
-
-    User user;
-
     /**
      * Creates new form viewDashboardUser
      */
+    
+    User user = new User();
+    private DefaultTableModel model;
+    private Hewan hewan;
+    ControllerHewan conHewan = new ControllerHewan();
+    ControllerUser conUser = new ControllerUser();
     public viewDashboardUser() {
         initComponents();
         setLocationRelativeTo(null);
+        model = new DefaultTableModel();
+        tabelHewan.setModel(model);
+        model.addColumn("Hewan_ID");
+        model.addColumn("Nama_Hewan");
+        model.addColumn("Harga");
+        model.addColumn("Berat");
+        getHewanData();
     }
-
+    public viewDashboardUser(User user){
+        initComponents();
+        setLocationRelativeTo(null);
+        model = new DefaultTableModel();
+        tabelHewan.setModel(model);
+        model.addColumn("Hewan_ID");
+        model.addColumn("Nama_Hewan");
+        model.addColumn("Harga");
+        model.addColumn("Berat");
+        this.user = user;
+        getHewanData();
+    }
+    
+    public final void getHewanData(){
+        DefaultTableModel dtm = (DefaultTableModel) tabelHewan.getModel();
+        dtm.setRowCount(0);
+        List<Hewan> listHewan = conHewan.showHewan();
+        String[] data = new String[4];
+        for (Hewan newHewan : listHewan){
+            data[0] = newHewan.getIdHewan();
+            data[1] = newHewan.getNamaHewan();
+            data[2] = Double.toString(newHewan.getHarga());
+            data[3] = Double.toString(newHewan.getBerat());
+            dtm.addRow(data);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -38,7 +79,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
         lbl_username = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelHewan = new javax.swing.JTable();
         btn_beli = new javax.swing.JButton();
         btn_history = new javax.swing.JButton();
 
@@ -99,10 +140,10 @@ public class viewDashboardUser extends javax.swing.JFrame {
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setBackground(new java.awt.Color(102, 102, 102));
-        jTable1.setForeground(new java.awt.Color(102, 102, 102));
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelHewan.setAutoCreateRowSorter(true);
+        tabelHewan.setBackground(new java.awt.Color(102, 102, 102));
+        tabelHewan.setForeground(new java.awt.Color(255, 255, 255));
+        tabelHewan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -113,9 +154,14 @@ public class viewDashboardUser extends javax.swing.JFrame {
                 "ID", "Nama Hewan", "Berat", "Harga"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(3).setResizable(false);
+        tabelHewan.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabelHewanMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tabelHewan);
+        if (tabelHewan.getColumnModel().getColumnCount() > 0) {
+            tabelHewan.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btn_beli.setBackground(new java.awt.Color(255, 255, 255));
@@ -176,9 +222,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -189,7 +233,12 @@ public class viewDashboardUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_beliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_beliActionPerformed
-        new viewPembayaran().setVisible(true);
+        int i = tabelHewan.getSelectedRow();
+        if (i == -1){
+            JOptionPane.showMessageDialog(btn_beli, "Pilih salah satu data:", "warning", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        viewPembayaran pagePembayaran = new viewPembayaran(user,hewan);
         dispose();
     }//GEN-LAST:event_btn_beliActionPerformed
 
@@ -213,8 +262,18 @@ public class viewDashboardUser extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_btn_historyActionPerformed
 
+    private void tabelHewanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabelHewanMouseClicked
+        // TODO add your handling code here:
+        int i = tabelHewan.getSelectedRow();
+        TableModel model = tabelHewan.getModel();
+        hewan.setIdHewan(model.getValueAt(i, 0).toString());
+        hewan.setNamaHewan(model.getValueAt(i, 1).toString());
+        hewan.setBerat((double) model.getValueAt(i, 2));
+        hewan.setHarga((double) model.getValueAt(i, 3));
+    }//GEN-LAST:event_tabelHewanMouseClicked
+
     /**
-     * @param args the command line arguments
+     * @pa9ram args the command line arguments
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -256,7 +315,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbl_username;
+    private javax.swing.JTable tabelHewan;
     // End of variables declaration//GEN-END:variables
 }

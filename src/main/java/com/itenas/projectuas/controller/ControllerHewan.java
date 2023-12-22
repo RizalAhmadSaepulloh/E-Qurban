@@ -5,6 +5,7 @@
 package com.itenas.projectuas.controller;
 
 import com.itenas.projectuas.entity.Hewan;
+import com.itenas.projectuas.entity.TemporaryTransaction;
 import com.itenas.projectuas.utilites.ConnectionManager;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -21,7 +22,7 @@ public class ControllerHewan {
     ConnectionManager conMan = new ConnectionManager();
     Connection con = conMan.LogOn();
     
-    public boolean insertHewan(String idHewan, String namaHewan, double harga, double berat) throws SQLException{
+    public boolean insertHewan(String idHewan, String namaHewan, double harga, double berat){
         String query = "insert into hewan values " 
                 + "('"+idHewan+"', '" + namaHewan + "', " + harga+", " + berat + ")";
         try {
@@ -40,8 +41,8 @@ public class ControllerHewan {
             ResultSet rs = stm.executeQuery("SELECT* from Hewan");
             while (rs.next()){
                 Hewan hewan = new Hewan();
-                hewan.setIdHewan(rs.getString("ID"));
-                hewan.setNamaHewan(rs.getString("Nama Hewan"));
+                hewan.setIdHewan(rs.getString("Hewan_ID"));
+                hewan.setNamaHewan(rs.getString("Nama_Hewan"));
                 hewan.setBerat(rs.getDouble("Berat"));
                 hewan.setHarga(rs.getDouble("Harga"));
                 listHewan.add(hewan);
@@ -53,7 +54,7 @@ public class ControllerHewan {
     }
     
     public boolean updateHewan(int newId,int idHewan ,String namaHewan, double harga, double berat){
-        String query = "UPDATE Hewan SET ID = '"
+        String query = "UPDATE Hewan SET Hewan_ID = '"
                 + newId + "', Nama = '" + namaHewan + "', Harga = " + harga + ", Berat = " + berat
                 + " WHERE ID = '" + idHewan + "'";
         try {
@@ -67,7 +68,7 @@ public class ControllerHewan {
     }
     
     public boolean deleteHewan(int id){
-        String query = "DELETE from Hewan where id = '" + id + "'";
+        String query = "DELETE from Hewan where Hewan_id = '" + id + "'";
         try {
             Statement stm = con.createStatement();
             stm.executeUpdate(query);

@@ -4,12 +4,16 @@
  */
 package com.itenas.projectuas.controller;
 
+import com.itenas.projectuas.entity.User;
 import com.itenas.projectuas.utilites.ConnectionManager;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,7 +24,7 @@ public class ControllerLogin {
     ConnectionManager conMan = new ConnectionManager();
     Connection con = conMan.LogOn();
 
-    public int login(String user, String pwd) {
+    public int Otorisasi(String user, String pwd) {
     int stat = 0;
 
     try {
@@ -32,7 +36,7 @@ public class ControllerLogin {
             stat = 1;  // Admin found
         } else {
             // Check for user
-            ResultSet rsUser = stm.executeQuery("SELECT username, password FROM user WHERE username = '" + user + "' and password = '" + pwd + "'");
+            ResultSet rsUser = stm.executeQuery("SELECT * FROM user WHERE username = '" + user + "' and password = '" + pwd + "'");
             if (rsUser.next() && Objects.equals(user, rsUser.getString("username")) && Objects.equals(pwd, rsUser.getString("password"))) {
                 stat = 2;  // User found
             }
@@ -42,12 +46,35 @@ public class ControllerLogin {
         stm.close();
 
         return stat;
+    }   catch (SQLException ex) {
+            // Handle SQL errors appropriately
+            // e.g., log the error, display a user-friendly message
+            ex.printStackTrace();
+            return stat;
+        }
+    }
+    public User loginUser(String username, String pwd) {
+    User user = null;
+    String query = "SELECT * FROM user WHERE username = ? AND password = ?";
+    
+    try (PreparedStatement pstmt = con.prepareStatement(query)) {
+        pstmt.setString(1, username);
+        pstmt.setString(2, pwd);
+        
+        ResultSet rs = pstmt.executeQuery();
+        
+        while (rs.next()) {
+            user = new User();
+            user.setUsername(rs.getString("username"));
+            user.setPassword(rs.getString("password"));
+            user.setNama(rs.getString("nama"));
+            user.setAlamat(rs.getString("alamat"));
+            user.setNoTelp(rs.getString("nomor_telepon"));
+        }
     } catch (SQLException ex) {
-        // Handle SQL errors appropriately
-        // e.g., log the error, display a user-friendly message
-        ex.printStackTrace();
-        return stat;
-    }         
+        Logger.getLogger(ControllerLogin.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    
+    return user;
 }
-
 }
