@@ -105,6 +105,11 @@ public class viewLogin extends javax.swing.JFrame {
                 btn_loginMouseClicked(evt);
             }
         });
+        btn_login.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_loginActionPerformed(evt);
+            }
+        });
 
         cb_pass.setText("Show Password");
         cb_pass.addActionListener(new java.awt.event.ActionListener() {
@@ -204,6 +209,10 @@ public class viewLogin extends javax.swing.JFrame {
         new viewRegister().setVisible(true);
         dispose();
     }//GEN-LAST:event_lbl_registerMouseClicked
+
+    private void btn_loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_loginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btn_loginActionPerformed
 
     /**
      * @param args the command line arguments

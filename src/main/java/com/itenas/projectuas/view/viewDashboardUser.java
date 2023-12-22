@@ -5,12 +5,15 @@
 package com.itenas.projectuas.view;
 
 import javax.swing.JOptionPane;
+import com.itenas.projectuas.entity.User;
 
 /**
  *
  * @author rizal
  */
 public class viewDashboardUser extends javax.swing.JFrame {
+
+    User user;
 
     /**
      * Creates new form viewDashboardUser
@@ -32,12 +35,12 @@ public class viewDashboardUser extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_username = new javax.swing.JLabel();
         btn_logout = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btn_beli = new javax.swing.JButton();
+        btn_history = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -49,9 +52,9 @@ public class viewDashboardUser extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Hello");
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("username");
+        lbl_username.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        lbl_username.setForeground(new java.awt.Color(255, 255, 255));
+        lbl_username.setText("username");
 
         btn_logout.setBackground(new java.awt.Color(255, 255, 255));
         btn_logout.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
@@ -76,7 +79,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lbl_username)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 268, Short.MAX_VALUE)
                 .addComponent(btn_logout)
                 .addGap(35, 35, 35))
@@ -89,7 +92,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel1)
-                            .addComponent(jLabel2)))
+                            .addComponent(lbl_username)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
                         .addComponent(btn_logout)))
@@ -115,17 +118,25 @@ public class viewDashboardUser extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(3).setResizable(false);
         }
 
-        jButton2.setBackground(new java.awt.Color(255, 255, 255));
-        jButton2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(51, 204, 0));
-        jButton2.setText("Beli");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btn_beli.setBackground(new java.awt.Color(255, 255, 255));
+        btn_beli.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_beli.setForeground(new java.awt.Color(51, 204, 0));
+        btn_beli.setText("Beli");
+        btn_beli.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btn_beliActionPerformed(evt);
             }
         });
 
-        jButton1.setText("Histori Pembelian");
+        btn_history.setBackground(new java.awt.Color(255, 255, 255));
+        btn_history.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_history.setForeground(new java.awt.Color(0, 204, 0));
+        btn_history.setText("Histori Pembelian");
+        btn_history.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_historyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -139,9 +150,9 @@ public class viewDashboardUser extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 542, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_history, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_beli, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(67, 67, 67))))
         );
         jPanel2Layout.setVerticalGroup(
@@ -152,8 +163,8 @@ public class viewDashboardUser extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btn_history, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_beli, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(29, Short.MAX_VALUE))
         );
 
@@ -177,17 +188,30 @@ public class viewDashboardUser extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btn_logoutActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void btn_beliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_beliActionPerformed
+        new viewPembayaran().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_beliActionPerformed
+
+    public User getUserInfo(User user) {
+        user = user;
+        lbl_username.setText(user.getNama());
+
+        return user;
+    }
 
     private void btn_logoutMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_logoutMouseClicked
-        int logout = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin logout ? ", "Warning",JOptionPane.YES_NO_OPTION);
+        int logout = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin logout ? ", "Warning", JOptionPane.YES_NO_OPTION);
         if (logout == JOptionPane.YES_OPTION) {
             new viewLogin().setVisible(true);
             dispose();
         }
     }//GEN-LAST:event_btn_logoutMouseClicked
+
+    private void btn_historyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_historyActionPerformed
+        new viewRiwayatTransaksi().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_historyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,14 +249,14 @@ public class viewDashboardUser extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_beli;
+    private javax.swing.JButton btn_history;
     private javax.swing.JButton btn_logout;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lbl_username;
     // End of variables declaration//GEN-END:variables
 }
