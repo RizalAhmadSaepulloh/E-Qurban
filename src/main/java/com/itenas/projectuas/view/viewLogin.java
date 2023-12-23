@@ -218,7 +218,7 @@ public class viewLogin extends javax.swing.JFrame {
             dispose();
         } else if (stat == 2) {
             JOptionPane.showMessageDialog(null, "Login Berhasil", "Pesan", JOptionPane.INFORMATION_MESSAGE);
-            viewDashboardUser dashboardUser = new viewDashboardUser(user);
+            viewDashboardUser dashboardUser = new viewDashboardUser();
             dashboardUser.getUserInfo(user);
             dashboardUser.setVisible(true);
             dispose();

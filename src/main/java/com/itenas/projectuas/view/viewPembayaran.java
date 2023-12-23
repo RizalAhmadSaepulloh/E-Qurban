@@ -10,6 +10,7 @@ import com.itenas.projectuas.entity.Transaksi;
 import com.itenas.projectuas.entity.User;
 import com.itenas.projectuas.utilites.AccountLoggedIn;
 import com.itenas.projectuas.utilites.ProductSelected;
+import com.itenas.projectuas.utilites.Transaction;
 import javax.swing.JOptionPane;
 
 /**
@@ -38,7 +39,7 @@ public class viewPembayaran extends javax.swing.JFrame {
         lbl_hewan.setText(hewan.getNamaHewan());
         lbl_berat.setText(Double.toString(hewan.getBerat()));
         lbl_harga.setText(Double.toString(hewan.getHarga()));
-        lbl_date.setText(transaksi.getTanggalBeli().toString());
+        lbl_date.setText(Transaction.getTanggal().toString());
         return hewan;
     }
     /**
@@ -141,13 +142,18 @@ public class viewPembayaran extends javax.swing.JFrame {
 
         lbl_date.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_date.setForeground(new java.awt.Color(102, 102, 102));
-        lbl_date.setText("Rp.");
+        lbl_date.setText("Tgl");
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Transfer:");
 
         btn_back.setText("Back");
+        btn_back.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_backActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -161,8 +167,8 @@ public class viewPembayaran extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addComponent(btn_back)
-                        .addGap(174, 174, 174)
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(155, 155, 155)
                         .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(221, 221, 221)
@@ -208,8 +214,8 @@ public class viewPembayaran extends javax.swing.JFrame {
                         .addComponent(jLabel7))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addComponent(btn_back)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 160, Short.MAX_VALUE)
+                        .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -262,16 +268,23 @@ public class viewPembayaran extends javax.swing.JFrame {
         // TODO add your handling code here:
         double saldo = Double.parseDouble(textInput.getText());
         double tagihan = Double.parseDouble(lbl_harga.getText());
-        boolean hasil;
         
-        if(saldo < tagihan){
+        if(tagihan > saldo){
             JOptionPane.showMessageDialog(null, "Uangnya kurang, masukkan lagi", "Pesan", JOptionPane.ERROR_MESSAGE);
-        } else if (saldo > tagihan){
-            conTr.insertTransaksi(user, hewan, ProductSelected.getTanggal());
-        } else if (saldo == tagihan){
-            
+        } else if (saldo >= tagihan){
+            conTr.insertTransaksi(user, hewan, Transaction.getTanggal());
+            Transaction.setSelisih((saldo - tagihan));
+            Transaction.setTransfer(saldo);
+            new viewKonfirmasiPembayaran().setVisible(true);
+            dispose();
         }
     }//GEN-LAST:event_btn_bayarActionPerformed
+
+    private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
+        // TODO add your handling code here:
+        new viewDashboardUser().setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btn_backActionPerformed
 
     /**
      * @param args the command line arguments

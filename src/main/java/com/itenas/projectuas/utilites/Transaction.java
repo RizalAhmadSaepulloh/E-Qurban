@@ -5,6 +5,7 @@
 package com.itenas.projectuas.utilites;
 
 import com.itenas.projectuas.entity.Transaksi;
+import java.time.LocalDate;
 
 /**
  *
@@ -14,7 +15,17 @@ public class Transaction {
     private static double selisih;
     private static double transfer;
     private static Transaksi transaksi;
+    private static LocalDate tanggal;
 
+    public static LocalDate getTanggal() {
+        return tanggal;
+    }
+
+    public static void setTanggal(LocalDate tanggal) {
+        Transaction.tanggal = tanggal;
+    }
+    
+    
     public static Transaksi getTransaksi() {
         return transaksi;
     }

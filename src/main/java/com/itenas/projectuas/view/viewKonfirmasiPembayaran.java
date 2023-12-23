@@ -4,6 +4,12 @@
  */
 package com.itenas.projectuas.view;
 
+import com.itenas.projectuas.entity.Hewan;
+import com.itenas.projectuas.entity.User;
+import com.itenas.projectuas.utilites.AccountLoggedIn;
+import com.itenas.projectuas.utilites.ProductSelected;
+import com.itenas.projectuas.utilites.Transaction;
+
 /**
  *
  * @author M Alif Mi'raj Jabbar
@@ -13,8 +19,14 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
     /**
      * Creates new form viewKonfirmasiPembayaran
      */
+    Hewan hewan = ProductSelected.getHewan();
+    User user = AccountLoggedIn.getCurrentUser();
     public viewKonfirmasiPembayaran() {
         initComponents();
+        setLocationRelativeTo(null);
+        hewan = ProductSelected.getHewan();
+        user = AccountLoggedIn.getCurrentUser();
+        showInfo();
     }
 
     /**
@@ -28,17 +40,17 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lbl_hewan = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         txtHewan = new javax.swing.JLabel();
         txtBerat = new javax.swing.JLabel();
         txtHarga = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        lbl_harga = new javax.swing.JLabel();
+        lbl_berat = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
+        lbl_transfer = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
+        lbl_kembalian = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,9 +60,9 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Transaksi Berhasil");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel2.setText("Hewan");
+        lbl_hewan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_hewan.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_hewan.setText("Hewan");
 
         jButton1.setBackground(new java.awt.Color(0, 102, 204));
         jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -73,29 +85,29 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
         txtHarga.setForeground(new java.awt.Color(0, 0, 0));
         txtHarga.setText("Harga: ");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel9.setText("Hewan");
+        lbl_harga.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_harga.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_harga.setText("Hewan");
 
-        jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel10.setText("Hewan");
+        lbl_berat.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_berat.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_berat.setText("Hewan");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(0, 0, 0));
         jLabel11.setText("Transfer: ");
 
-        jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel12.setText("Hewan");
+        lbl_transfer.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_transfer.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_transfer.setText("Hewan");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(0, 0, 0));
         jLabel13.setText("Kembalian: ");
 
-        jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(0, 0, 0));
-        jLabel14.setText("Hewan");
+        lbl_kembalian.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lbl_kembalian.setForeground(new java.awt.Color(0, 0, 0));
+        lbl_kembalian.setText("Hewan");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,21 +131,21 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(txtBerat)
                                         .addGap(18, 18, 18)
-                                        .addComponent(jLabel10)))
+                                        .addComponent(lbl_berat)))
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel2))
+                                .addComponent(lbl_hewan))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(txtHarga)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel9))
+                                .addComponent(lbl_harga))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel11)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel12))
+                                .addComponent(lbl_transfer))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel13)
                                 .addGap(18, 18, 18)
-                                .addComponent(jLabel14)))))
+                                .addComponent(lbl_kembalian)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -143,24 +155,24 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(57, 57, 57)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
+                    .addComponent(lbl_hewan)
                     .addComponent(txtHewan))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtHarga)
-                    .addComponent(jLabel9))
+                    .addComponent(lbl_harga))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtBerat)
-                    .addComponent(jLabel10))
+                    .addComponent(lbl_berat))
                 .addGap(56, 56, 56)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel11)
-                    .addComponent(jLabel12))
+                    .addComponent(lbl_transfer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel13)
-                    .addComponent(jLabel14))
+                    .addComponent(lbl_kembalian))
                 .addGap(66, 66, 66)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(46, 46, 46))
@@ -182,8 +194,16 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        new viewDashboardUser().setVisible(true);
+        dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    private void showInfo() {
+        lbl_hewan.setText(hewan.getNamaHewan());
+        lbl_harga.setText(Double.toString(hewan.getHarga()));
+        lbl_berat.setText(Double.toString(hewan.getBerat()));
+        lbl_transfer.setText(Double.toString(Transaction.getTransfer()));
+        lbl_kembalian.setText(Double.toString(Transaction.getSelisih()));
+    }
     /**
      * @param args the command line arguments
      */
@@ -222,16 +242,18 @@ public class viewKonfirmasiPembayaran extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel lbl_berat;
+    private javax.swing.JLabel lbl_harga;
+    private javax.swing.JLabel lbl_hewan;
+    private javax.swing.JLabel lbl_kembalian;
+    private javax.swing.JLabel lbl_transfer;
     private javax.swing.JLabel txtBerat;
     private javax.swing.JLabel txtHarga;
     private javax.swing.JLabel txtHewan;
     // End of variables declaration//GEN-END:variables
+
+    
 }

@@ -9,7 +9,9 @@ import com.itenas.projectuas.controller.ControllerUser;
 import com.itenas.projectuas.entity.Hewan;
 import javax.swing.JOptionPane;
 import com.itenas.projectuas.entity.User;
+import com.itenas.projectuas.utilites.AccountLoggedIn;
 import com.itenas.projectuas.utilites.ProductSelected;
+import com.itenas.projectuas.utilites.Transaction;
 import java.time.LocalDate;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -39,18 +41,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
         model.addColumn("Nama_Hewan");
         model.addColumn("Harga");
         model.addColumn("Berat");
-        getHewanData();
-    }
-    public viewDashboardUser(User user){
-        initComponents();
-        setLocationRelativeTo(null);
-        model = new DefaultTableModel();
-        tabelHewan.setModel(model);
-        model.addColumn("Hewan_ID");
-        model.addColumn("Nama_Hewan");
-        model.addColumn("Berat");
-        model.addColumn("Harga");
-        this.user = user;
+        this.user = AccountLoggedIn.getCurrentUser();
         getHewanData();
     }
     
@@ -247,7 +238,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
     }
     LocalDate tanggal = LocalDate.now();
     ProductSelected.setHewan(hewan);
-    ProductSelected.setTanggal(tanggal);
+    Transaction.setTanggal(tanggal);
     viewPembayaran pagePembayaran = new viewPembayaran();        
     pagePembayaran.setVisible(true);
     
@@ -290,7 +281,6 @@ public class viewDashboardUser extends javax.swing.JFrame {
         hewan.setNamaHewan(namaHewan);
         hewan.setBerat(Double.parseDouble(berat));
         hewan.setHarga(Double.parseDouble(harga));
-        
     }//GEN-LAST:event_tabelHewanMouseClicked
 
     /**
