@@ -14,7 +14,7 @@ public class User {
     private String alamat;
     private String nama;
     private String noTelp;
-
+    
     public User() {
         
     }

@@ -36,17 +36,18 @@ public class ControllerUser {
             }
 
             // Username is available, proceed with insertion
-            String query = "INSERT INTO user VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO user (username, password, nama, alamat, nomor_telepon) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(query);
             stm.setString(1, username);
             stm.setString(2, password); // Assuming password is hashed before insertion
             stm.setString(3, nama);
             stm.setString(4, alamat);
-            stm.setString(5, noTelp);
+            stm.setString(5, noTelp); // Menyimpan data gambar
             stm.executeUpdate();
             return true;
         } catch (SQLException ex) {
             // Handle SQL errors appropriately
+            ex.printStackTrace();
             return false;
         }
     }
