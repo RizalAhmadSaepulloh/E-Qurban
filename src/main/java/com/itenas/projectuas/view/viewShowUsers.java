@@ -33,7 +33,7 @@ public class viewShowUsers extends javax.swing.JFrame {
         model.addColumn("username");
         model.addColumn("nama");
         model.addColumn("alamat");
-        model.addColumn("no_telepon");
+        model.addColumn("nomor_telepon");
         getData();
     }
 

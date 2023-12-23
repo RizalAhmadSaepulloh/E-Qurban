@@ -61,7 +61,7 @@ public class ControllerUser {
                 user.setUsername(rs.getString("username"));
                 user.setNama(rs.getString("nama"));
                 user.setAlamat(rs.getString("alamat"));
-                user.setNoTelp(rs.getString("no_telepon"));
+                user.setNoTelp(rs.getString("nomor_telepon"));
                 listUser.add(user);
             }
         } catch (SQLException ex) {

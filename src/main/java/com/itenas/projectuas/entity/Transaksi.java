@@ -4,18 +4,20 @@
  */
 package com.itenas.projectuas.entity;
 
+import java.time.LocalDate;
+
 public class Transaksi {
     private String invoice;
     private String namaHewan;
     private String berat;
     private String username;
-    private String tanggalBeli;
+    private LocalDate tanggalBeli;
     private double harga;
-
+    
     public Transaksi() {
     }
 
-    public Transaksi(String invoice, String namaHewan, String berat, String username, String tanggalBeli, double harga) {
+    public Transaksi(String invoice, String namaHewan, String berat, String username, LocalDate tanggalBeli, double harga) {
         this.invoice = invoice;
         this.namaHewan = namaHewan;
         this.berat = berat;
@@ -56,11 +58,11 @@ public class Transaksi {
         this.username = username;
     }
 
-    public String getTanggalBeli() {
+    public LocalDate getTanggalBeli() {
         return tanggalBeli;
     }
 
-    public void setTanggalBeli(String tanggalBeli) {
+    public void setTanggalBeli(LocalDate tanggalBeli) {
         this.tanggalBeli = tanggalBeli;
     }
 

@@ -10,6 +10,7 @@ import com.itenas.projectuas.entity.Hewan;
 import javax.swing.JOptionPane;
 import com.itenas.projectuas.entity.User;
 import com.itenas.projectuas.utilites.ProductSelected;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -47,8 +48,8 @@ public class viewDashboardUser extends javax.swing.JFrame {
         tabelHewan.setModel(model);
         model.addColumn("Hewan_ID");
         model.addColumn("Nama_Hewan");
-        model.addColumn("Harga");
         model.addColumn("Berat");
+        model.addColumn("Harga");
         this.user = user;
         getHewanData();
     }
@@ -61,8 +62,8 @@ public class viewDashboardUser extends javax.swing.JFrame {
         for (Hewan newHewan : listHewan){
             data[0] = newHewan.getIdHewan();
             data[1] = newHewan.getNamaHewan();
-            data[2] = Double.toString(newHewan.getHarga());
-            data[3] = Double.toString(newHewan.getBerat());
+            data[2] = Double.toString(newHewan.getBerat());
+            data[3] = Double.toString(newHewan.getHarga());
             dtm.addRow(data);
         }
     }
@@ -244,10 +245,12 @@ public class viewDashboardUser extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(btn_beli, "Data hewan tidak valid:", "warning", JOptionPane.WARNING_MESSAGE);
         return;
     }
-    viewPembayaran pagePembayaran = new viewPembayaran(user, hewan);
+    LocalDate tanggal = LocalDate.now();
     ProductSelected.setHewan(hewan);
-    pagePembayaran.getDetailTransaction();
+    ProductSelected.setTanggal(tanggal);
+    viewPembayaran pagePembayaran = new viewPembayaran();        
     pagePembayaran.setVisible(true);
+    
     dispose();
     }//GEN-LAST:event_btn_beliActionPerformed
 
@@ -282,7 +285,6 @@ public class viewDashboardUser extends javax.swing.JFrame {
         String harga = model.getValueAt(i, 2).toString();
         String berat =  model.getValueAt(i, 3).toString();
         
-
         // Set data hewan
         hewan.setIdHewan(idHewan);
         hewan.setNamaHewan(namaHewan);

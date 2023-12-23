@@ -5,6 +5,7 @@
 package com.itenas.projectuas.utilites;
 
 import com.itenas.projectuas.entity.Hewan;
+import java.time.LocalDate;
 
 /**
  *
@@ -12,7 +13,16 @@ import com.itenas.projectuas.entity.Hewan;
  */
 public class ProductSelected {
     private static Hewan hewan;
+    private static LocalDate tanggal;
 
+    public static LocalDate getTanggal() {
+        return tanggal;
+    }
+
+    public static void setTanggal(LocalDate tanggal) {
+        ProductSelected.tanggal = tanggal;
+    }
+    
     public static Hewan getHewan() {
         return hewan;
     }
