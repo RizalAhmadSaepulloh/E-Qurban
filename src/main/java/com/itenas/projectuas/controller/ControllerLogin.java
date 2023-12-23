@@ -5,6 +5,7 @@
 package com.itenas.projectuas.controller;
 
 import com.itenas.projectuas.entity.User;
+import com.itenas.projectuas.utilites.AccountLoggedIn;
 import com.itenas.projectuas.utilites.ConnectionManager;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,6 +71,7 @@ public class ControllerLogin {
             user.setNama(rs.getString("nama"));
             user.setAlamat(rs.getString("alamat"));
             user.setNoTelp(rs.getString("nomor_telepon"));
+            AccountLoggedIn.setCurrentUser(user);
         }
     } catch (SQLException ex) {
         Logger.getLogger(ControllerLogin.class.getName()).log(Level.SEVERE, null, ex);

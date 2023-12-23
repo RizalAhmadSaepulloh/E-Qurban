@@ -5,7 +5,6 @@
 package com.itenas.projectuas.controller;
 
 import com.itenas.projectuas.entity.Hewan;
-import com.itenas.projectuas.entity.TemporaryTransaction;
 import com.itenas.projectuas.utilites.ConnectionManager;
 import java.sql.Connection;
 import java.sql.ResultSet;

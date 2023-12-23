@@ -9,6 +9,7 @@ import com.itenas.projectuas.controller.ControllerUser;
 import com.itenas.projectuas.entity.Hewan;
 import javax.swing.JOptionPane;
 import com.itenas.projectuas.entity.User;
+import com.itenas.projectuas.utilites.ProductSelected;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
@@ -27,6 +28,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
     private Hewan hewan = new Hewan();
     ControllerHewan conHewan = new ControllerHewan();
     ControllerUser conUser = new ControllerUser();
+    
     public viewDashboardUser() {
         initComponents();
         setLocationRelativeTo(null);
@@ -243,6 +245,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
         return;
     }
     viewPembayaran pagePembayaran = new viewPembayaran(user, hewan);
+    ProductSelected.setHewan(hewan);
     pagePembayaran.getDetailTransaction();
     pagePembayaran.setVisible(true);
     dispose();
