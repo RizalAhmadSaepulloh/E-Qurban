@@ -11,9 +11,13 @@ import com.itenas.projectuas.utilites.AccountLoggedIn;
 import com.itenas.projectuas.utilites.ConnectionManager;
 import com.itenas.projectuas.utilites.ProductSelected;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -35,6 +39,27 @@ public class ControllerTransaksi {
         } catch (SQLException ex){
             return false;
         }
+    }
+    
+    public List<Transaksi> showTransaksi(User user) {
+        List<Transaksi> listtTransaksi = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+        try {
+            Statement stm = con.createStatement();
+            ResultSet rs = stm.executeQuery("SELECT Invoice.transaksi , Nama_Hewan.hewan , Berat.hewan , Harga.hewan , Tanggal_beli.transaksi from transaksi join hewan on transaksi.Hewan_ID = hewan.Hewan_ID join user on user.username = transaksi.username where user.username = '"+user+"';");
+            while (rs.next()) {
+                Transaksi transaksi = new Transaksi();
+                transaksi.setInvoice(rs.getString("Invoice.transaksi"));
+                transaksi.setNamaHewan(rs.getString("Nama_Hewan.hewan"));
+                transaksi.setBerat(rs.getDouble("Berat.hewan"));
+                transaksi.setHarga(rs.getDouble("Harga.hewan"));
+                transaksi.setTanggalBeli(LocalDate.parse(rs.getString("Tanggal_beli.transaksi"), formatter));
+                listtTransaksi.add(transaksi);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.toString());
+        }
+        return listtTransaksi;
     }
 }
 

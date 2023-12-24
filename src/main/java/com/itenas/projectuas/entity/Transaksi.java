@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public class Transaksi {
     private String invoice;
     private String namaHewan;
-    private String berat;
+    private double berat;
     private String username;
     private LocalDate tanggalBeli;
     private double harga;
@@ -17,7 +17,7 @@ public class Transaksi {
     public Transaksi() {
     }
 
-    public Transaksi(String invoice, String namaHewan, String berat, String username, LocalDate tanggalBeli, double harga) {
+    public Transaksi(String invoice, String namaHewan, double berat, String username, LocalDate tanggalBeli, double harga) {
         this.invoice = invoice;
         this.namaHewan = namaHewan;
         this.berat = berat;
@@ -25,6 +25,8 @@ public class Transaksi {
         this.tanggalBeli = tanggalBeli;
         this.harga = harga;
     }
+
+    
 
     public String getInvoice() {
         return invoice;
@@ -42,11 +44,11 @@ public class Transaksi {
         this.namaHewan = namaHewan;
     }
 
-    public String getBerat() {
+    public Double getBerat() {
         return berat;
     }
 
-    public void setBerat(String berat) {
+    public void setBerat(Double berat) {
         this.berat = berat;
     }
 
