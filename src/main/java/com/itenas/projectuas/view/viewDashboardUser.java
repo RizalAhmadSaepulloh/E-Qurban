@@ -94,7 +94,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "ID", "Nama Hewan", "Harga", "Berat"
+                "ID", "Nama Hewan", "Berat", "Harga"
             }
         ));
         tabelHewan.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,7 +104,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tabelHewan);
         if (tabelHewan.getColumnModel().getColumnCount() > 0) {
-            tabelHewan.getColumnModel().getColumn(2).setResizable(false);
+            tabelHewan.getColumnModel().getColumn(3).setResizable(false);
         }
 
         btn_beli.setBackground(new java.awt.Color(255, 255, 255));
@@ -166,13 +166,13 @@ public class viewDashboardUser extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(lbl_username))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
-                            .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(67, 67, 67)
+                        .addComponent(lbl_username)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -180,7 +180,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(151, 151, 151)
                 .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(lbl_username)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btn_logout, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)

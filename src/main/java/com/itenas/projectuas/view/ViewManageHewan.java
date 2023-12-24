@@ -50,9 +50,6 @@ public class ViewManageHewan extends javax.swing.JFrame {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        btn_Home = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tbl_hewan = new javax.swing.JTable();
         txt_ID = new javax.swing.JTextField();
@@ -67,48 +64,12 @@ public class ViewManageHewan extends javax.swing.JFrame {
         btn_insert = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btn_Home = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel1.setBackground(new java.awt.Color(204, 204, 204));
-
-        jPanel2.setBackground(new java.awt.Color(51, 204, 0));
-
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
-        jLabel1.setText("Manage Hewan");
-
-        btn_Home.setBackground(new java.awt.Color(255, 255, 255));
-        btn_Home.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btn_Home.setForeground(new java.awt.Color(51, 204, 0));
-        btn_Home.setText("Home");
-        btn_Home.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_HomeActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btn_Home)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel1)
-                .addGap(17, 17, 17))
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(btn_Home)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tbl_hewan.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -128,14 +89,19 @@ public class ViewManageHewan extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(tbl_hewan);
 
+        txt_ID.setForeground(new java.awt.Color(0, 0, 0));
+        txt_ID.setBorder(null);
+
         jLabel2.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel2.setForeground(new java.awt.Color(0, 102, 204));
         jLabel2.setText("ID :");
 
         jLabel3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel3.setForeground(new java.awt.Color(0, 102, 204));
         jLabel3.setText("Nama Hewan :");
 
+        Txt_namaHewan.setForeground(new java.awt.Color(0, 0, 0));
+        Txt_namaHewan.setBorder(new javax.swing.border.MatteBorder(null));
         Txt_namaHewan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Txt_namaHewanActionPerformed(evt);
@@ -143,50 +109,75 @@ public class ViewManageHewan extends javax.swing.JFrame {
         });
 
         jLabel4.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel4.setForeground(new java.awt.Color(0, 102, 204));
         jLabel4.setText("Berat :");
 
+        txt_Berat.setForeground(new java.awt.Color(0, 0, 0));
+        txt_Berat.setBorder(new javax.swing.border.MatteBorder(null));
+
         jLabel5.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(51, 204, 0));
+        jLabel5.setForeground(new java.awt.Color(0, 102, 204));
         jLabel5.setText("Harga :");
 
+        txt_harga.setForeground(new java.awt.Color(0, 0, 0));
+        txt_harga.setBorder(new javax.swing.border.MatteBorder(null));
+
         btn_clear.setBackground(new java.awt.Color(255, 255, 255));
-        btn_clear.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btn_clear.setForeground(new java.awt.Color(51, 204, 0));
+        btn_clear.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_clear.setForeground(new java.awt.Color(0, 102, 204));
         btn_clear.setText("Clear");
+        btn_clear.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 204)));
         btn_clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_clearActionPerformed(evt);
             }
         });
 
-        btn_insert.setBackground(new java.awt.Color(0, 102, 204));
-        btn_insert.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btn_insert.setForeground(new java.awt.Color(255, 255, 255));
+        btn_insert.setBackground(new java.awt.Color(255, 255, 255));
+        btn_insert.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_insert.setForeground(new java.awt.Color(0, 102, 204));
         btn_insert.setText("Insert");
+        btn_insert.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 204)));
         btn_insert.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_insertActionPerformed(evt);
             }
         });
 
-        btn_delete.setBackground(new java.awt.Color(204, 0, 0));
+        btn_delete.setBackground(new java.awt.Color(255, 255, 255));
         btn_delete.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btn_delete.setForeground(new java.awt.Color(255, 255, 255));
+        btn_delete.setForeground(new java.awt.Color(255, 0, 0));
         btn_delete.setText("Delete");
+        btn_delete.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(255, 0, 0)));
         btn_delete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_deleteActionPerformed(evt);
             }
         });
 
-        btn_update.setBackground(new java.awt.Color(51, 204, 0));
-        btn_update.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        btn_update.setForeground(new java.awt.Color(255, 255, 255));
+        btn_update.setBackground(new java.awt.Color(255, 255, 255));
+        btn_update.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_update.setForeground(new java.awt.Color(0, 102, 204));
         btn_update.setText("Update");
+        btn_update.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(0, 102, 204)));
         btn_update.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_updateActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setBackground(new java.awt.Color(204, 204, 204));
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 36)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 102, 204));
+        jLabel1.setText("E-Qurban's Hewan Database");
+
+        btn_Home.setBackground(new java.awt.Color(0, 102, 204));
+        btn_Home.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        btn_Home.setForeground(new java.awt.Color(255, 255, 255));
+        btn_Home.setText("Home");
+        btn_Home.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_HomeActionPerformed(evt);
             }
         });
 
@@ -194,20 +185,19 @@ public class ViewManageHewan extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(114, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(btn_insert)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_delete)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btn_update))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(107, 107, 107)
+                                .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 502, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(63, 63, 63)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
@@ -220,16 +210,28 @@ public class ViewManageHewan extends javax.swing.JFrame {
                                     .addComponent(Txt_namaHewan, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_Berat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btn_clear))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)))
+                        .addGap(52, 52, 52))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(167, 167, 167))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(29, 29, 29)
+                .addComponent(btn_Home, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 252, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(2, 2, 2)
@@ -240,20 +242,22 @@ public class ViewManageHewan extends javax.swing.JFrame {
                         .addComponent(Txt_namaHewan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4)
-                        .addGap(2, 2, 2)
+                        .addGap(8, 8, 8)
                         .addComponent(txt_Berat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel5)
                         .addGap(2, 2, 2)
                         .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btn_clear)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btn_clear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_insert)
-                    .addComponent(btn_delete)
-                    .addComponent(btn_update))
-                .addGap(0, 29, Short.MAX_VALUE))
+                    .addComponent(btn_insert, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_update, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_delete, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 81, Short.MAX_VALUE)
+                .addComponent(btn_Home, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -327,16 +331,16 @@ public class ViewManageHewan extends javax.swing.JFrame {
         TableModel model = tbl_hewan.getModel();
 
         // Dapatkan data hewan dari baris yang dipilih
-        String idHewan = model.getValueAt(i, 0).toString();
-        String namaHewan = model.getValueAt(i, 1).toString();
-        String harga = model.getValueAt(i, 2).toString();
-        String berat = model.getValueAt(i, 3).toString();
+        txt_ID.setText(model.getValueAt(i, 0).toString());
+        Txt_namaHewan.setText(model.getValueAt(i, 1).toString());
+        txt_Berat.setText(model.getValueAt(i, 2).toString());
+        txt_harga.setText(model.getValueAt(i, 3).toString());
 
         // Set data hewan
-        hewan.setIdHewan(idHewan);
-        hewan.setNamaHewan(namaHewan);
-        hewan.setBerat(Double.parseDouble(berat));
-        hewan.setHarga(Double.parseDouble(harga));
+        hewan.setIdHewan(txt_ID.getText());
+        hewan.setNamaHewan(Txt_namaHewan.getText());
+        hewan.setBerat(Double.parseDouble(txt_Berat.getText()));
+        hewan.setHarga(Double.parseDouble(txt_harga.getText()));
     }//GEN-LAST:event_tbl_hewanMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
@@ -425,7 +429,6 @@ public class ViewManageHewan extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbl_hewan;
     private javax.swing.JTextField txt_Berat;
