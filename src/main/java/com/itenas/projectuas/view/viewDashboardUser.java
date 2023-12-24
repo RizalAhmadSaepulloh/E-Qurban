@@ -39,8 +39,9 @@ public class viewDashboardUser extends javax.swing.JFrame {
         tabelHewan.setModel(model);
         model.addColumn("Hewan_ID");
         model.addColumn("Nama_Hewan");
-        model.addColumn("Harga");
         model.addColumn("Berat");
+        model.addColumn("Harga");
+        
         this.user = AccountLoggedIn.getCurrentUser();
         getHewanData();
     }
@@ -295,8 +296,9 @@ public class viewDashboardUser extends javax.swing.JFrame {
         // Dapatkan data hewan dari baris yang dipilih
         String idHewan = model.getValueAt(i, 0).toString();
         String namaHewan = model.getValueAt(i, 1).toString();
-        String harga = model.getValueAt(i, 2).toString();
-        String berat =  model.getValueAt(i, 3).toString();
+        String berat =  model.getValueAt(i, 2).toString();
+        String harga = model.getValueAt(i, 3).toString();
+        
         
         // Set data hewan
         hewan.setIdHewan(idHewan);
