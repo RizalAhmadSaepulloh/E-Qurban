@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -23,7 +25,7 @@ public class ControllerUser {
     ConnectionManager conMan = new ConnectionManager();
     Connection con = conMan.LogOn();
 
-    public boolean insertUser(String username, String password, String nama, String alamat, String noTelp) {
+    public boolean insertUser(String username, String password, String nama, String alamat, String noTelp, byte[] image) {
         try {
             // Check for existing username
             PreparedStatement stmCheck = con.prepareStatement("SELECT * FROM user WHERE username = ?");
@@ -36,13 +38,14 @@ public class ControllerUser {
             }
 
             // Username is available, proceed with insertion
-            String query = "INSERT INTO user (username, password, nama, alamat, nomor_telepon) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO user (username, password, nama, alamat, nomor_telepon, foto) VALUES (?, ?, ?, ?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(query);
             stm.setString(1, username);
-            stm.setString(2, password); // Assuming password is hashed before insertion
+            stm.setString(2, password); 
             stm.setString(3, nama);
             stm.setString(4, alamat);
-            stm.setString(5, noTelp); // Menyimpan data gambar
+            stm.setString(5, noTelp); 
+            stm.setBytes(6, image); // Menyimpan data gambar
             stm.executeUpdate();
             return true;
         } catch (SQLException ex) {
@@ -71,4 +74,21 @@ public class ControllerUser {
         return listUser;
     }
 
+    public byte[] getUserPhoto(String username) {
+    byte[] image = null;
+    try {
+        String query = "SELECT foto FROM user WHERE username = '" + username + "'";
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery(query);
+
+        // Pindahkan kursor ke baris pertama
+        if (rs.next()) {
+            image = rs.getBytes("foto");
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(ControllerUser.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return image;
+} 
+    
 }
