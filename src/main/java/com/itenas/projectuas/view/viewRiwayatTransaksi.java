@@ -47,7 +47,7 @@ public class viewRiwayatTransaksi extends javax.swing.JFrame {
         DefaultTableModel dtm = (DefaultTableModel) tbl_histori.getModel();
         dtm.setRowCount(0);
 
-        List<Transaksi> listTransksi = conTrans.showTransaksi(this.user);
+        List<Transaksi> listTransksi = conTrans.showTransaksi(user);
         String[] data = new String[5];
         for (Transaksi newTransaksi : listTransksi) {
             data[0] = newTransaksi.getInvoice();
