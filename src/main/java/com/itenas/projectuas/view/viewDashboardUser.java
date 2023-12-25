@@ -43,6 +43,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
         model.addColumn("Harga");
         
         this.user = AccountLoggedIn.getCurrentUser();
+        getUserInfo(user);
         getHewanData();
     }
     
