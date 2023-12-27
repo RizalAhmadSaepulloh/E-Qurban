@@ -24,7 +24,6 @@ public class viewPembayaran extends javax.swing.JFrame {
      */
     private User user;
     private Hewan hewan;
-    private Transaksi transaksi = new Transaksi();
     private ControllerTransaksi conTr = new ControllerTransaksi();
     
     public viewPembayaran() {
@@ -148,6 +147,9 @@ public class viewPembayaran extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
         jLabel15.setText("Transfer:");
 
+        btn_back.setBackground(new java.awt.Color(0, 102, 204));
+        btn_back.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_back.setForeground(new java.awt.Color(255, 255, 255));
         btn_back.setText("Back");
         btn_back.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

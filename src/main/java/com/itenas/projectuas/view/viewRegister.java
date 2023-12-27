@@ -23,7 +23,6 @@ import javax.swing.filechooser.FileNameExtensionFilter;
  */
 public class viewRegister extends javax.swing.JFrame {
     
-    ControllerLogin conLog = new ControllerLogin();
     ControllerUser conUs = new ControllerUser();
     private File selectedFile;
     /**
@@ -249,7 +248,7 @@ public class viewRegister extends javax.swing.JFrame {
                                 .addGap(224, 224, 224))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(btn_upload, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(203, 203, 203))))))
+                                .addGap(197, 197, 197))))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

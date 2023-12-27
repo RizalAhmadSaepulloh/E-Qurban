@@ -329,14 +329,19 @@ public class ViewManageHewan extends javax.swing.JFrame {
         // Dapatkan data hewan dari baris yang dipilih
         String idHewan = model.getValueAt(i, 0).toString();
         String namaHewan = model.getValueAt(i, 1).toString();
-        String harga = model.getValueAt(i, 2).toString();
-        String berat = model.getValueAt(i, 3).toString();
-
+        String berat = model.getValueAt(i, 2).toString();
+        String harga = model.getValueAt(i, 3).toString();
+        
         // Set data hewan
         hewan.setIdHewan(idHewan);
         hewan.setNamaHewan(namaHewan);
         hewan.setBerat(Double.parseDouble(berat));
         hewan.setHarga(Double.parseDouble(harga));
+        
+        txt_ID.setText(hewan.getIdHewan());
+        Txt_namaHewan.setText(hewan.getNamaHewan());
+        txt_Berat.setText(Double.toString(hewan.getBerat()));
+        txt_harga.setText(Double.toString(hewan.getHarga()));
     }//GEN-LAST:event_tbl_hewanMouseClicked
 
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed

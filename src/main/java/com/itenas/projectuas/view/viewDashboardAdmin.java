@@ -8,6 +8,7 @@ import com.itenas.projectuas.controller.ControllerTransaksi;
 import com.itenas.projectuas.entity.Transaksi;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -80,7 +81,7 @@ public class viewDashboardAdmin extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btn_logout = new javax.swing.JButton();
         Btn_manageuser = new javax.swing.JButton();
         Btn_manageHewan = new javax.swing.JButton();
 
@@ -114,20 +115,20 @@ public class viewDashboardAdmin extends javax.swing.JFrame {
         jButton7.setForeground(new java.awt.Color(0, 255, 0));
         jButton7.setText("Logout");
 
-        jButton3.setBackground(new java.awt.Color(255, 255, 255));
-        jButton3.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(51, 204, 0));
-        jButton3.setText("Log out");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        btn_logout.setBackground(new java.awt.Color(255, 255, 255));
+        btn_logout.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
+        btn_logout.setForeground(new java.awt.Color(51, 204, 0));
+        btn_logout.setText("Log out");
+        btn_logout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                btn_logoutActionPerformed(evt);
             }
         });
 
         Btn_manageuser.setBackground(new java.awt.Color(255, 255, 255));
         Btn_manageuser.setFont(new java.awt.Font("Arial", 1, 12)); // NOI18N
         Btn_manageuser.setForeground(new java.awt.Color(51, 204, 0));
-        Btn_manageuser.setText("Manage User");
+        Btn_manageuser.setText("Inspect user");
         Btn_manageuser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Btn_manageuserActionPerformed(evt);
@@ -156,7 +157,7 @@ public class viewDashboardAdmin extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Btn_manageuser)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton3)
+                .addComponent(btn_logout)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20))
@@ -168,7 +169,7 @@ public class viewDashboardAdmin extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton7)
-                        .addComponent(jButton3)
+                        .addComponent(btn_logout)
                         .addComponent(Btn_manageuser)
                         .addComponent(Btn_manageHewan))
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -212,9 +213,14 @@ public class viewDashboardAdmin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void btn_logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_logoutActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton3ActionPerformed
+        int logout = JOptionPane.showConfirmDialog(null, "Apakah anda yakin ingin logout ? ", "Warning", JOptionPane.YES_NO_OPTION);
+        if (logout == JOptionPane.YES_OPTION) {
+            new viewLogin().setVisible(true);
+            dispose();
+        }
+    }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void Btn_manageuserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_manageuserActionPerformed
         new viewShowUsers().setVisible(true);
@@ -264,7 +270,7 @@ public class viewDashboardAdmin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Btn_manageHewan;
     private javax.swing.JButton Btn_manageuser;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btn_logout;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

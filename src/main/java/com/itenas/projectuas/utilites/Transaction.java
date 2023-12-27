@@ -14,7 +14,6 @@ import java.time.LocalDate;
 public class Transaction {
     private static double selisih;
     private static double transfer;
-    private static Transaksi transaksi;
     private static LocalDate tanggal;
 
     public static LocalDate getTanggal() {
@@ -23,15 +22,6 @@ public class Transaction {
 
     public static void setTanggal(LocalDate tanggal) {
         Transaction.tanggal = tanggal;
-    }
-    
-    
-    public static Transaksi getTransaksi() {
-        return transaksi;
-    }
-
-    public static void setTransaksi(Transaksi transaksi) {
-        Transaction.transaksi = transaksi;
     }
     
     public static double getSelisih() {
