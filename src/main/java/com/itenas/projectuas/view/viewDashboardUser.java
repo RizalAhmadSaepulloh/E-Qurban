@@ -249,7 +249,7 @@ public class viewDashboardUser extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_logoutActionPerformed
 
     private void btn_beliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_beliActionPerformed
-        int i = tabelHewan.getSelectedRow();
+    int i = tabelHewan.getSelectedRow();
     if (i == -1) {
         JOptionPane.showMessageDialog(btn_beli, "Pilih salah satu data:", "warning", JOptionPane.WARNING_MESSAGE);
         return;

@@ -11,6 +11,7 @@ import com.itenas.projectuas.utilites.AccountLoggedIn;
 import com.itenas.projectuas.utilites.ConnectionManager;
 import com.itenas.projectuas.utilites.ProductSelected;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,71 +25,114 @@ import java.util.List;
  * @author M Alif Mi'raj Jabbar
  */
 public class ControllerTransaksi {
+
     ConnectionManager conMan = new ConnectionManager();
     Connection con = conMan.LogOn();
-    
-    public boolean insertTransaksi(User user, Hewan hewan, LocalDate tanggalBeli){
+
+    public boolean insertTransaksi(User user, Hewan hewan, LocalDate tanggalBeli, String namaTujuan, String rekening, String jenisBank, Double saldo, Double tagihan, double selisih) {
         user = AccountLoggedIn.getCurrentUser();
         hewan = ProductSelected.getHewan();
-        String query = "INSERT INTO Transaksi (Username, Hewan_ID, Tanggal_Beli) VALUES "
-                + "('" + user.getUsername() + "', '" + hewan.getIdHewan() + "', '" + tanggalBeli + "')";
-        try {
-            Statement stm = con.createStatement();
-            stm.executeUpdate(query);
+
+        String query = "INSERT INTO Transaksi (Username, Hewan_ID, Tanggal_Beli, Nama_Tujuan, Rekening, Jenis_Bank, Saldo, Tagihan, Selisih) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, user.getUsername());
+            preparedStatement.setString(2, hewan.getIdHewan());
+            preparedStatement.setString(3, tanggalBeli.toString());
+            preparedStatement.setString(4, namaTujuan);
+            preparedStatement.setString(5, rekening);
+            preparedStatement.setString(6, jenisBank);
+            preparedStatement.setDouble(7, saldo);
+            preparedStatement.setDouble(8, tagihan);
+            preparedStatement.setDouble(9, selisih);
+
+            preparedStatement.executeUpdate();
             return true;
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
+            ex.printStackTrace();
             return false;
         }
     }
-    
-   public List<Transaksi> showTransaksi(User user) {
-    List<Transaksi> listtTransaksi = new ArrayList<>();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    try {
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT Invoice, Nama_Hewan, Berat, Harga, Tanggal_beli\n"
-                + "FROM transaksi\n"
-                + "JOIN hewan ON transaksi.Hewan_ID = hewan.Hewan_ID\n"
-                + "WHERE username = '" + user.getUsername() + "';");
-        while (rs.next()) {
-            Transaksi transaksi = new Transaksi();
-            transaksi.setInvoice(rs.getString("transaksi.Invoice"));
-            transaksi.setNamaHewan(rs.getString("hewan.Nama_Hewan"));
-            transaksi.setBerat(rs.getDouble("hewan.Berat"));
-            transaksi.setHarga(rs.getDouble("hewan.Harga"));
-            transaksi.setTanggalBeli(LocalDate.parse(rs.getString("transaksi.Tanggal_beli"), formatter));
-            listtTransaksi.add(transaksi);
+
+    public List<Transaksi> showTransaksi(User user) {
+        List<Transaksi> listtTransaksi = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String query = "SELECT transaksi.Invoice, user.Username, user.Nama, user.Alamat, hewan.Hewan_ID, "
+                + "transaksi.Tanggal_beli, hewan.Nama_Hewan, hewan.Berat, hewan.Harga, "
+                + "transaksi.Nama_Tujuan, transaksi.Jenis_Bank, transaksi.Saldo, "
+                + "transaksi.Tagihan, transaksi.Selisih "
+                + "FROM transaksi "
+                + "JOIN hewan ON transaksi.Hewan_ID = hewan.Hewan_ID "
+                + "JOIN user ON user.username = transaksi.username "
+                + "WHERE user.username = ?";
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            preparedStatement.setString(1, user.getUsername());
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Transaksi transaksi = new Transaksi();
+                transaksi.setInvoice(rs.getString("Invoice"));
+                transaksi.setNamaHewan(rs.getString("Nama_Hewan"));
+                transaksi.setBerat(rs.getDouble("Berat"));
+                transaksi.setHarga(rs.getDouble("Harga"));
+                transaksi.setUsername(rs.getString("Username"));
+                transaksi.setNama(rs.getString("Nama"));
+                transaksi.setAlamat(rs.getString("Alamat"));
+                transaksi.setHewanId(rs.getString("Hewan_ID"));
+                transaksi.setTanggalBeli(LocalDate.parse(rs.getString("Tanggal_beli"), formatter));
+                transaksi.setNamaTujuan(rs.getString("Nama_Tujuan"));
+                transaksi.setJenisBank(rs.getString("Jenis_Bank"));
+                transaksi.setSaldo(rs.getDouble("Saldo"));
+                transaksi.setTagihan(rs.getDouble("Tagihan"));
+                transaksi.setSelisih(rs.getDouble("Selisih"));
+
+                listtTransaksi.add(transaksi);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Log or handle the exception according to your application's needs
         }
-    } catch (SQLException ex) {
-        System.out.println(ex.toString());
+        return listtTransaksi;
     }
-    return listtTransaksi;
-}
-   public List<Transaksi> showTransaksiAdmin() {
-    List<Transaksi> listtTransaksi = new ArrayList<>();
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-    try {
-        Statement stm = con.createStatement();
-        ResultSet rs = stm.executeQuery("SELECT transaksi.Invoice, hewan.Nama_Hewan, hewan.Berat, user.username, transaksi.Tanggal_beli, hewan.Harga\n"
-                + "FROM transaksi\n"
-                + "JOIN hewan ON transaksi.Hewan_ID = hewan.Hewan_ID\n"
-                + "JOIN user ON user.username = transaksi.username ;");
-        while (rs.next()) {
-            Transaksi transaksi = new Transaksi();
-            transaksi.setInvoice(rs.getString("Invoice"));
-            transaksi.setNamaHewan(rs.getString("Nama_Hewan"));
-            transaksi.setBerat(rs.getDouble("Berat"));
-            transaksi.setHarga(rs.getDouble("Harga"));
-            transaksi.setTanggalBeli(LocalDate.parse(rs.getString("Tanggal_beli"), formatter));
-            transaksi.setUsername(rs.getString("username"));
-            listtTransaksi.add(transaksi);
+
+    public List<Transaksi> showTransaksiAdmin() {
+        List<Transaksi> listtTransaksi = new ArrayList<>();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        String query = "SELECT transaksi.Invoice, user.Username, user.Nama, user.Alamat, hewan.Hewan_ID, "
+                + "transaksi.Tanggal_beli, hewan.Nama_Hewan, hewan.Berat, hewan.Harga, "
+                + "transaksi.Nama_Tujuan, transaksi.Rekening, transaksi.Jenis_Bank, transaksi.Saldo, "
+                + "transaksi.Tagihan, transaksi.Selisih "
+                + "FROM transaksi "
+                + "JOIN hewan ON transaksi.Hewan_ID = hewan.Hewan_ID "
+                + "JOIN user ON user.username = transaksi.username";
+
+        try (PreparedStatement preparedStatement = con.prepareStatement(query)) {
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                Transaksi transaksi = new Transaksi();
+                transaksi.setInvoice(rs.getString("Invoice"));
+                transaksi.setNamaHewan(rs.getString("Nama_Hewan"));
+                transaksi.setBerat(rs.getDouble("Berat"));
+                transaksi.setHarga(rs.getDouble("Harga"));
+                transaksi.setUsername(rs.getString("Username"));
+                transaksi.setNama(rs.getString("Nama"));
+                transaksi.setAlamat(rs.getString("Alamat"));
+                transaksi.setHewanId(rs.getString("Hewan_ID"));
+                transaksi.setTanggalBeli(LocalDate.parse(rs.getString("Tanggal_beli"), formatter));
+                transaksi.setNamaTujuan(rs.getString("Nama_Tujuan"));
+                transaksi.setRekening(rs.getString("Rekening"));
+                transaksi.setJenisBank(rs.getString("Jenis_Bank"));
+                transaksi.setSaldo(rs.getDouble("Saldo"));
+                transaksi.setTagihan(rs.getDouble("Tagihan"));
+                transaksi.setSelisih(rs.getDouble("Selisih"));
+
+                listtTransaksi.add(transaksi);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace(); // Log or handle the exception according to your application's needs
         }
-    } catch (SQLException ex) {
-        System.out.println(ex.toString());
+        return listtTransaksi;
     }
-    return listtTransaksi;
-}
-
 
 }
-
