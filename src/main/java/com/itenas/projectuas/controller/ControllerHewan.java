@@ -21,7 +21,7 @@ public class ControllerHewan {
     ConnectionManager conMan = new ConnectionManager();
     Connection con = conMan.LogOn();
     
-    public boolean insertHewan(String idHewan, String namaHewan, double harga, double berat){
+    public boolean insertHewan(String idHewan, String namaHewan, double berat, double harga){
         String query = "insert into hewan values " 
                 + "('"+idHewan+"', '" + namaHewan + "', " + berat + ", " + harga + ")";
         try {
@@ -52,10 +52,10 @@ public class ControllerHewan {
         return listHewan;
     }
     
-    public boolean updateHewan(int newId,int idHewan ,String namaHewan, double harga, double berat){
+    public boolean updateHewan(String newId,String idHewan ,String namaHewan, double harga, double berat){
         String query = "UPDATE Hewan SET Hewan_ID = '"
                 + newId + "', Nama = '" + namaHewan + "', Harga = " + harga + ", Berat = " + berat
-                + " WHERE ID = '" + idHewan + "'";
+                + " WHERE Hewan_ID = '" + idHewan + "'";
         try {
             Statement stm = con.createStatement();
             stm.executeUpdate(query);
@@ -66,7 +66,7 @@ public class ControllerHewan {
         }
     }
     
-    public boolean deleteHewan(int id){
+    public boolean deleteHewan(String id){
         String query = "DELETE from Hewan where Hewan_id = '" + id + "'";
         try {
             Statement stm = con.createStatement();

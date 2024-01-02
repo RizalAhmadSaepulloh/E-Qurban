@@ -353,7 +353,7 @@ public class ViewManageHewan extends javax.swing.JFrame {
             return;
         }
 
-        int id = Integer.parseInt(tbl_hewan.getModel().getValueAt(i, 0).toString());
+        String id = tbl_hewan.getModel().getValueAt(i, 0).toString();
 
         conHe.deleteHewan(id);
         JOptionPane.showMessageDialog(btn_delete, "Data berhasil dihapus");
@@ -370,8 +370,8 @@ public class ViewManageHewan extends javax.swing.JFrame {
             return;
         }
 
-        int id = Integer.parseInt(tbl_hewan.getModel().getValueAt(i, 0).toString());
-        int newID = Integer.parseInt(txt_ID.getText());
+        String id = tbl_hewan.getModel().getValueAt(i, 0).toString();
+        String newID = txt_ID.getText();
         String nama = Txt_namaHewan.getText();
         double berat = Double.parseDouble(txt_Berat.getText());
         double harga = Double.parseDouble(txt_harga.getText());
