@@ -8,7 +8,15 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import com.itenas.projectuas.entity.Hewan;
 import com.itenas.projectuas.controller.ControllerHewan;
+import java.awt.Image;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.TableModel;
 
 /**
@@ -24,7 +32,8 @@ public class ViewManageHewan extends javax.swing.JFrame {
     boolean hasil;
     private DefaultTableModel model;
     private Hewan hewan = new Hewan();
-
+    private File selectedFile;
+    
     public ViewManageHewan() {
         initComponents();
         setLocationRelativeTo(null);
@@ -67,6 +76,9 @@ public class ViewManageHewan extends javax.swing.JFrame {
         btn_insert = new javax.swing.JButton();
         btn_delete = new javax.swing.JButton();
         btn_update = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
+        lbl_image = new javax.swing.JLabel();
+        btn_upload = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -190,6 +202,34 @@ public class ViewManageHewan extends javax.swing.JFrame {
             }
         });
 
+        lbl_image.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+
+        jDesktopPane1.setLayer(lbl_image, javax.swing.JLayeredPane.DEFAULT_LAYER);
+
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDesktopPane1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lbl_image, javax.swing.GroupLayout.DEFAULT_SIZE, 108, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        btn_upload.setText("Upload");
+        btn_upload.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_uploadActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -199,9 +239,9 @@ public class ViewManageHewan extends javax.swing.JFrame {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
+                        .addGap(29, 29, 29)
                         .addComponent(btn_insert)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_delete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btn_update))
@@ -214,14 +254,24 @@ public class ViewManageHewan extends javax.swing.JFrame {
                             .addComponent(jLabel4)
                             .addComponent(jLabel5)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txt_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(Txt_namaHewan, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_Berat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(btn_clear))))
-                .addContainerGap(58, Short.MAX_VALUE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_ID, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(Txt_namaHewan, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txt_Berat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(23, 23, 23)
+                                        .addComponent(btn_clear)))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(btn_upload)
+                                        .addGap(47, 47, 47)))))))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -229,31 +279,38 @@ public class ViewManageHewan extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btn_insert)
+                            .addComponent(btn_delete)
+                            .addComponent(btn_update)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(2, 2, 2)
                         .addComponent(txt_ID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3)
-                        .addGap(2, 2, 2)
-                        .addComponent(Txt_namaHewan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel4)
-                        .addGap(2, 2, 2)
-                        .addComponent(txt_Berat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel5)
-                        .addGap(2, 2, 2)
-                        .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_clear)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_insert)
-                    .addComponent(btn_delete)
-                    .addComponent(btn_update))
-                .addGap(0, 29, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel3)
+                                .addGap(2, 2, 2)
+                                .addComponent(Txt_namaHewan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4)
+                                .addGap(2, 2, 2)
+                                .addComponent(txt_Berat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5)
+                                .addGap(2, 2, 2)
+                                .addComponent(txt_harga, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_clear))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btn_upload)))))
+                .addGap(0, 181, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -295,7 +352,7 @@ public class ViewManageHewan extends javax.swing.JFrame {
         Txt_namaHewan.setText("");
         txt_Berat.setText("");
         txt_harga.setText("");
-
+        lbl_image.setIcon(null);
     }
     private void Txt_namaHewanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Txt_namaHewanActionPerformed
         // TODO add your handling code here:
@@ -312,7 +369,8 @@ public class ViewManageHewan extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_clearActionPerformed
 
     private void btn_insertActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_insertActionPerformed
-        hasil = conHe.insertHewan(txt_ID.getText(), Txt_namaHewan.getText(), Double.parseDouble(txt_Berat.getText()), Double.parseDouble(txt_harga.getText()));
+        byte[] image = readImageFile(selectedFile);
+        hasil = conHe.insertHewan(txt_ID.getText(), Txt_namaHewan.getText(), Double.parseDouble(txt_Berat.getText()), Double.parseDouble(txt_harga.getText()), image);
         if (hasil) {
             JOptionPane.showMessageDialog(null, "Data Berhasil Ditambahkan");
             getData();
@@ -325,25 +383,43 @@ public class ViewManageHewan extends javax.swing.JFrame {
     private void tbl_hewanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbl_hewanMouseClicked
         int i = tbl_hewan.getSelectedRow();
         TableModel model = tbl_hewan.getModel();
+        if (i != -1){
+            // Dapatkan data hewan dari baris yang dipilih
+            String idHewan = model.getValueAt(i, 0).toString();
+            String namaHewan = model.getValueAt(i, 1).toString();
+            String berat = model.getValueAt(i, 2).toString();
+            String harga = model.getValueAt(i, 3).toString();
+            displayHewanPhoto(idHewan);
 
-        // Dapatkan data hewan dari baris yang dipilih
-        String idHewan = model.getValueAt(i, 0).toString();
-        String namaHewan = model.getValueAt(i, 1).toString();
-        String berat = model.getValueAt(i, 2).toString();
-        String harga = model.getValueAt(i, 3).toString();
-        
-        // Set data hewan
-        hewan.setIdHewan(idHewan);
-        hewan.setNamaHewan(namaHewan);
-        hewan.setBerat(Double.parseDouble(berat));
-        hewan.setHarga(Double.parseDouble(harga));
-        
-        txt_ID.setText(hewan.getIdHewan());
-        Txt_namaHewan.setText(hewan.getNamaHewan());
-        txt_Berat.setText(Double.toString(hewan.getBerat()));
-        txt_harga.setText(Double.toString(hewan.getHarga()));
+            // Set data hewan
+            hewan.setIdHewan(idHewan);
+            hewan.setNamaHewan(namaHewan);
+            hewan.setBerat(Double.parseDouble(berat));
+            hewan.setHarga(Double.parseDouble(harga));
+
+            txt_ID.setText(hewan.getIdHewan());
+            Txt_namaHewan.setText(hewan.getNamaHewan());
+            txt_Berat.setText(Double.toString(hewan.getBerat()));
+            txt_harga.setText(Double.toString(hewan.getHarga()));
+        }
     }//GEN-LAST:event_tbl_hewanMouseClicked
 
+    private void displayHewanPhoto(String idHewan){
+        try {
+            byte[] hewanImage = conHe.getHewanPhoto(idHewan);
+            if (hewanImage != null) {
+                ImageIcon imageIcon = new ImageIcon(hewanImage);
+                Image image = imageIcon.getImage().getScaledInstance(lbl_image.getWidth(), lbl_image.getHeight(), Image.SCALE_SMOOTH);
+                lbl_image.setIcon(new ImageIcon(image));
+            } else {
+                // Handle case when no photo is available
+                lbl_image.setIcon(null);
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+    
     private void btn_deleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_deleteActionPerformed
         int i = tbl_hewan.getSelectedRow();
 
@@ -382,6 +458,43 @@ public class ViewManageHewan extends javax.swing.JFrame {
         clearData();
     }//GEN-LAST:event_btn_updateActionPerformed
 
+    private void btn_uploadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_uploadActionPerformed
+        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setFileFilter(new FileNameExtensionFilter("Image Files", "jpg", "png", "jpeg"));
+
+        int result = fileChooser.showOpenDialog(this);
+
+        if (result == JFileChooser.APPROVE_OPTION) {
+            selectedFile = fileChooser.getSelectedFile();
+            // Menampilkan gambar pada JLabel
+            displayImage(selectedFile);
+        }
+    }//GEN-LAST:event_btn_uploadActionPerformed
+    
+    private void displayImage(File imageFile) {
+        ImageIcon imageIcon = new ImageIcon(imageFile.getAbsolutePath());
+        Image image = imageIcon.getImage().getScaledInstance(lbl_image.getWidth(), lbl_image.getHeight(), Image.SCALE_SMOOTH);
+        lbl_image.setIcon(new ImageIcon(image));
+    }
+    
+    private byte[] readImageFile(File file) {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            byte[] buf = new byte[1024];
+
+            int bytesRead;
+            while ((bytesRead = fis.read(buf)) != -1) {
+                bos.write(buf, 0, bytesRead);
+            }
+
+            return bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -424,6 +537,8 @@ public class ViewManageHewan extends javax.swing.JFrame {
     private javax.swing.JButton btn_delete;
     private javax.swing.JButton btn_insert;
     private javax.swing.JButton btn_update;
+    private javax.swing.JButton btn_upload;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -432,9 +547,12 @@ public class ViewManageHewan extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lbl_image;
     private javax.swing.JTable tbl_hewan;
     private javax.swing.JTextField txt_Berat;
     private javax.swing.JTextField txt_ID;
     private javax.swing.JTextField txt_harga;
     // End of variables declaration//GEN-END:variables
+
+    
 }

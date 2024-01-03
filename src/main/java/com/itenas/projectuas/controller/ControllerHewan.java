@@ -7,11 +7,14 @@ package com.itenas.projectuas.controller;
 import com.itenas.projectuas.entity.Hewan;
 import com.itenas.projectuas.utilites.ConnectionManager;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,14 +24,29 @@ public class ControllerHewan {
     ConnectionManager conMan = new ConnectionManager();
     Connection con = conMan.LogOn();
     
-    public boolean insertHewan(String idHewan, String namaHewan, double berat, double harga){
-        String query = "insert into hewan values " 
-                + "('"+idHewan+"', '" + namaHewan + "', " + berat + ", " + harga + ")";
+    public boolean insertHewan(String idHewan, String namaHewan, double berat, double harga, byte[] image){
         try {
-            Statement stm = con.createStatement();
-            stm.executeUpdate(query);
+            PreparedStatement stmCheck = con.prepareStatement("SELECT * FROM Hewan WHERE Hewan_ID = ?");
+            stmCheck.setString(1, idHewan);
+            ResultSet rs = stmCheck.executeQuery();
+
+            if (rs.next()) {
+                return false;
+            }
+
+            // Username is available, proceed with insertion
+            String query = "INSERT INTO hewan (Hewan_ID, Nama_Hewan, Berat, Harga, foto) VALUES (?, ?, ?, ?, ?)";
+            PreparedStatement stm = con.prepareStatement(query);
+            stm.setString(1, idHewan);
+            stm.setString(2, namaHewan); 
+            stm.setDouble(3, berat);
+            stm.setDouble(4, harga);
+            stm.setBytes(5, image); 
+            stm.executeUpdate();
             return true;
-        } catch (SQLException ex){
+        } catch (SQLException ex) {
+            // Handle SQL errors appropriately
+            ex.printStackTrace();
             return false;
         }
     }
@@ -76,5 +94,22 @@ public class ControllerHewan {
             System.out.println(ex.toString());
             return false;
         }
+    }
+    
+    public byte[] getHewanPhoto(String idHewan){
+        byte[] image = null;
+        try {
+        String query = "SELECT foto FROM hewan WHERE Hewan_ID = '" + idHewan + "'";
+        Statement stm = con.createStatement();
+        ResultSet rs = stm.executeQuery(query);
+
+        // Pindahkan kursor ke baris pertama
+        if (rs.next()) {
+            image = rs.getBytes("foto");
+        }
+    } catch (SQLException ex) {
+        Logger.getLogger(ControllerUser.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return image;
     }
 }
