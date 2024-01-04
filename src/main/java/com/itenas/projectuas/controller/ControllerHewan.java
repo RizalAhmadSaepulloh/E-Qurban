@@ -35,7 +35,7 @@ public class ControllerHewan {
             }
 
             // Username is available, proceed with insertion
-            String query = "INSERT INTO hewan (Hewan_ID, Nama_Hewan, Berat, Harga, foto) VALUES (?, ?, ?, ?, ?)";
+            String query = "INSERT INTO hewan (Hewan_ID, Nama_Hewan, Berat, Harga, Foto) VALUES (?, ?, ?, ?, ?)";
             PreparedStatement stm = con.prepareStatement(query);
             stm.setString(1, idHewan);
             stm.setString(2, namaHewan); 
@@ -99,13 +99,13 @@ public class ControllerHewan {
     public byte[] getHewanPhoto(String idHewan){
         byte[] image = null;
         try {
-        String query = "SELECT foto FROM hewan WHERE Hewan_ID = '" + idHewan + "'";
+        String query = "SELECT Foto FROM hewan WHERE Hewan_ID = '" + idHewan + "'";
         Statement stm = con.createStatement();
         ResultSet rs = stm.executeQuery(query);
 
         // Pindahkan kursor ke baris pertama
         if (rs.next()) {
-            image = rs.getBytes("foto");
+            image = rs.getBytes("Foto");
         }
     } catch (SQLException ex) {
         Logger.getLogger(ControllerUser.class.getName()).log(Level.SEVERE, null, ex);

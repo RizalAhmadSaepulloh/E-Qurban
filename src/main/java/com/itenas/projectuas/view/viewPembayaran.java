@@ -11,6 +11,7 @@ import com.itenas.projectuas.entity.User;
 import com.itenas.projectuas.utilites.AccountLoggedIn;
 import com.itenas.projectuas.utilites.ProductSelected;
 import com.itenas.projectuas.utilites.Transaction;
+import java.time.LocalDate;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,11 +68,17 @@ public class viewPembayaran extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
-        textInput = new javax.swing.JTextField();
+        text_jmlhbayar = new javax.swing.JTextField();
         lbl_harga = new javax.swing.JLabel();
         lbl_date = new javax.swing.JLabel();
         jLabel15 = new javax.swing.JLabel();
         btn_back = new javax.swing.JButton();
+        jLabel16 = new javax.swing.JLabel();
+        textI_namatujuan = new javax.swing.JTextField();
+        jLabel17 = new javax.swing.JLabel();
+        textI_rekening = new javax.swing.JTextField();
+        jLabel18 = new javax.swing.JLabel();
+        cmb_bank = new javax.swing.JComboBox<>();
 
         jLabel6.setText("jLabel6");
 
@@ -132,8 +139,8 @@ public class viewPembayaran extends javax.swing.JFrame {
         jLabel14.setForeground(new java.awt.Color(102, 102, 102));
         jLabel14.setText("Tanggal: ");
 
-        textInput.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        textInput.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+        text_jmlhbayar.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        text_jmlhbayar.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
 
         lbl_harga.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         lbl_harga.setForeground(new java.awt.Color(102, 102, 102));
@@ -145,7 +152,7 @@ public class viewPembayaran extends javax.swing.JFrame {
 
         jLabel15.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(102, 102, 102));
-        jLabel15.setText("Transfer:");
+        jLabel15.setText("Jumlah Transfer:");
 
         btn_back.setBackground(new java.awt.Color(0, 102, 204));
         btn_back.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -156,6 +163,26 @@ public class viewPembayaran extends javax.swing.JFrame {
                 btn_backActionPerformed(evt);
             }
         });
+
+        jLabel16.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel16.setText("Nama Tujuan");
+
+        textI_namatujuan.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textI_namatujuan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        jLabel17.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel17.setText("Rekening");
+
+        textI_rekening.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        textI_rekening.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(0, 0, 0)));
+
+        jLabel18.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(102, 102, 102));
+        jLabel18.setText("Jenis Bank :");
+
+        cmb_bank.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "BNI", "MANDIRI", "BCA", "BRI", "BTN" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -170,8 +197,15 @@ public class viewPembayaran extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(26, 26, 26)
                         .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(155, 155, 155)
-                        .addComponent(jLabel7))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(155, 155, 155)
+                                .addComponent(jLabel7))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(298, 298, 298)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel17)
+                                    .addComponent(textI_rekening, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(221, 221, 221)
                         .addComponent(jLabel1))
@@ -204,7 +238,11 @@ public class viewPembayaran extends javax.swing.JFrame {
                             .addComponent(jLabel15)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(btn_bayar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(text_jmlhbayar, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel16)
+                            .addComponent(textI_namatujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel18)
+                            .addComponent(cmb_bank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -213,13 +251,21 @@ public class viewPembayaran extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel7))
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
+                        .addComponent(jLabel17)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textI_rekening, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(btn_back, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addComponent(jLabel16)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(textI_namatujuan, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel12)
                             .addComponent(lbl_hewan))
@@ -236,14 +282,18 @@ public class viewPembayaran extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel14)
                             .addComponent(lbl_date)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cmb_bank, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel15)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(textInput, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btn_bayar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(133, 133, 133)
+                        .addComponent(text_jmlhbayar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(43, 43, 43)
+                .addComponent(btn_bayar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addGap(78, 78, 78)
                 .addComponent(jLabel4)
@@ -267,19 +317,28 @@ public class viewPembayaran extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btn_bayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_bayarActionPerformed
-        // TODO add your handling code here:
-        double saldo = Double.parseDouble(textInput.getText());
-        double tagihan = Double.parseDouble(lbl_harga.getText());
-        
-        if(tagihan > saldo){
-            JOptionPane.showMessageDialog(null, "Uangnya kurang, masukkan lagi", "Pesan", JOptionPane.ERROR_MESSAGE);
-        } else if (saldo >= tagihan){
-            conTr.insertTransaksi(user, hewan, Transaction.getTanggal());
-            Transaction.setSelisih((saldo - tagihan));
-            Transaction.setTransfer(saldo);
-            new viewKonfirmasiPembayaran().setVisible(true);
-            dispose();
+      // TODO add your handling code here:
+        try {
+            double saldo = Double.parseDouble(text_jmlhbayar.getText());
+            double tagihan = Double.parseDouble(lbl_harga.getText());
+            String selectedItem = (String) cmb_bank.getSelectedItem();
+            String norek = textI_rekening.getText();
+            String namatujuan = textI_namatujuan.getText();
+
+            if (tagihan > saldo) {
+                JOptionPane.showMessageDialog(null, "Uangnya kurang, masukkan lagi", "Pesan", JOptionPane.ERROR_MESSAGE);
+            } else if (saldo >= tagihan) {
+                double selisih = saldo - tagihan;
+                conTr.insertTransaksi(user, hewan, Transaction.getTanggal(), namatujuan, norek, selectedItem, saldo, tagihan, selisih);
+                Transaction.setSelisih((saldo - tagihan));
+                Transaction.setTransfer(saldo);
+                new viewKonfirmasiPembayaran().setVisible(true);
+                dispose();
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Masukkan jumlah transfer yang valid", "Pesan", JOptionPane.ERROR_MESSAGE);
         }
+
     }//GEN-LAST:event_btn_bayarActionPerformed
 
     private void btn_backActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_backActionPerformed
@@ -326,6 +385,7 @@ public class viewPembayaran extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_back;
     private javax.swing.JButton btn_bayar;
+    private javax.swing.JComboBox<String> cmb_bank;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -333,6 +393,9 @@ public class viewPembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -345,6 +408,8 @@ public class viewPembayaran extends javax.swing.JFrame {
     private javax.swing.JLabel lbl_date;
     private javax.swing.JLabel lbl_harga;
     private javax.swing.JLabel lbl_hewan;
-    private javax.swing.JTextField textInput;
+    private javax.swing.JTextField textI_namatujuan;
+    private javax.swing.JTextField textI_rekening;
+    private javax.swing.JTextField text_jmlhbayar;
     // End of variables declaration//GEN-END:variables
 }
